@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Compras</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            background-image: url(img/saude-financeira-5-dicas-para-economizar-nas-compras-de-supermercado-2073110638.webp);
+            background-position: center;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 320px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 0.5rem;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+            background: #f1f1f1;
+            padding: 0.5rem;
+            border-radius: 5px;
+        }
+        .remove {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .remove:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Compras</h1>
+        <input type="text" id="item" placeholder="Adicione um item">
+        <input type="number" id="quantidade" placeholder="Quantidade" min="1">
+        <button onclick="adicionarItem()">Adicionar</button>
+        <ul id="lista"></ul>
+    </div>
+
+    <script>
+        function adicionarItem() {
+            const itemInput = document.getElementById('item');
+            const quantidadeInput = document.getElementById('quantidade');
+            const itemTexto = itemInput.value.trim();
+            const quantidade = quantidadeInput.value.trim();
+
+            if (itemTexto === '' || quantidade === '' || isNaN(quantidade) || quantidade <= 0) return;
+
+            const li = document.createElement('li');
+            li.innerHTML = `${itemTexto} (x${quantidade}) <button class="remove" onclick="removerItem(this)">X</button>`;
+
+            document.getElementById('lista').appendChild(li);
+            itemInput.value = '';
+            quantidadeInput.value = '';
+            itemInput.focus();
+        }
+
+        function removerItem(botao) {
+            const li = botao.parentElement;
+            li.remove();
+        }
+    </script>
+</body>
+</html>
